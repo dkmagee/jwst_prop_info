@@ -88,7 +88,7 @@ def get_visit_status(pid):
             ro = vd["repeatOf"]
             visit_dict[
                 "repeat"
-            ] = f"Repeat of observation {ro['observation']} visit(s) {rb['visit']} in this program by WOPR {rb['problemID']}"
+            ] = f"Repeat of observation {ro['observation']} visit(s) {ro['visit']} in this program by WOPR {ro['problemID']}"
 
         elif "approvedRepeat" in vd:
             ar = vd["approvedRepeat"]
