@@ -41,7 +41,11 @@ def get_visit_status(pid):
     xml_response = requests.get(xmlurl)
     visit_data = xmltodict.parse(xml_response.text)
     visits = []
-    for vd in visit_data["visitStatusReport"]["visit"]:
+    if isinstance(visit_data["visitStatusReport"]["visit"], list):
+        visit_data_list = visit_data["visitStatusReport"]["visit"]
+    else:
+        visit_data_list = [visit_data["visitStatusReport"]["visit"]]
+    for vd in visit_data_list:
         # observation, visit, status, target, configuration, hours, start_ut, end_ut, plan_window, repeat
         visit_dict = {}
         visit_dict["observation"] = vd["@observation"]
