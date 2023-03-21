@@ -51,7 +51,10 @@ def get_visit_status(pid):
         visit_dict["observation"] = vd["@observation"]
         visit_dict["visit"] = vd["@visit"]
         visit_dict["status"] = vd["status"]
-        visit_dict["target"] = vd["target"]
+        if "target" in vd:
+            visit_dict["target"] = vd["target"]
+        else:
+            visit_dict["target"] = None
         visit_dict["configuration"] = vd["configuration"]
         visit_dict["hours"] = vd["hours"]
 
@@ -77,7 +80,7 @@ def get_visit_status(pid):
         elif "longRangePlanStatus" in vd:
             visit_dict[
                 "plan_window"
-            ] = "Ready for long range planning, plan window not yet assigned"
+            ] = vd["longRangePlanStatus"]
 
         else:
             visit_dict["plan_window"] = None
